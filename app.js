@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
 app.use(morgan('dev'));
+app.use(bodyParser.json());
 
 const questionRoutes = require('./api/routes/questions');
 const answerRoutes = require('./api/routes/answers');
