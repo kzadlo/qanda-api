@@ -13,6 +13,9 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cors);
 
+const userRoutes = require('./api/routes/users');
+app.use('/users', userRoutes);
+
 const questionRoutes = require('./api/routes/questions');
 app.use('/questions', questionRoutes);
 
