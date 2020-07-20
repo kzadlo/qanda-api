@@ -4,11 +4,12 @@ const mongoose = require('mongoose');
 const cors = require('./api/middlewares/cors');
 const error404 = require('./api/middlewares/404');
 const errorHandler = require('./api/middlewares/error-handler');
+const auth = require('./api/middlewares/auth');
 const morgan = require('morgan');
 const userRoutes = require('./api/routes/users');
 const questionRoutes = require('./api/routes/questions');
-require('dotenv').config();
 const answerRoutes = require('./api/routes/answers');
+require('dotenv').config();
 
 const app = express();
 
@@ -17,8 +18,8 @@ app.use(bodyParser.json());
 app.use(cors);
 
 app.use('/users', userRoutes);
-app.use('/questions', questionRoutes);
-app.use('/answers', answerRoutes);
+app.use('/questions', auth, questionRoutes);
+app.use('/answers', auth, answerRoutes);
 
 mongoose.connect(
     process.env.MONGO_URL,
